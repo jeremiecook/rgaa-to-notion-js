@@ -1,13 +1,15 @@
-const { globby } = require("globby");
+const glob = require("glob");
 
 class RGAA {
   constructor() {
     const rules_path = process.env.RULES_PATH + "/**/*.md";
-    const paths = await globby(rules_path);
+    const paths = glob(rules_path);
     console.log(paths);
   }
-  categories() {}
-  rules() {}
+  categories() { }
+  rules() {
+    return []
+  }
 }
 
-export default RGAA;
+module.exports = { RGAA }

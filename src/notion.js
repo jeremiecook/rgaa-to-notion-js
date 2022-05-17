@@ -37,7 +37,7 @@ class Notion {
     };
   }
 
-  create_test(rule_id, test) {}
+  create_test(rule_id, test) { }
 }
 
-export default Notion;
+module.exports = { Notion }

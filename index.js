@@ -3,8 +3,8 @@ require("dotenv").config();
 const { RGAA } = require("./src/rgaa.js");
 const { Notion } = require("./src/notion.js");
 
-rgaa = RGAA();
-notion = Notion();
+rgaa = new RGAA();
+notion = new Notion();
 
 rules = rgaa.rules();
 
