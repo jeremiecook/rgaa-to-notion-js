@@ -6,10 +6,11 @@
   "author": "Jérémie Cook <jeremie.cook@beta.gouv.fr>",
   "license": "MIT",
   "dependencies": {
-    "@instantish/martian": "^1.1.1",
     "@notionhq/client": "^1.0.4",
+    "@tryfabric/martian": "^1.2.0",
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
+    "he": "^1.2.0",
     "remarkable": "^2.0.1",
     "remarkable-meta": "^1.0.1"
   },

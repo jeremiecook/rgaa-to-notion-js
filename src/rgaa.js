@@ -2,6 +2,7 @@ const { Remarkable } = require("remarkable");
 const meta = require("remarkable-meta");
 const glob = require("glob");
 const fs = require("fs");
+const he = require("he");
 
 class RGAA {
   rules = [];
@@ -15,10 +16,24 @@ class RGAA {
     this.load_rules();
   }
 
-  load_categories() {}
+  load_categories() {
+    const path = process.env.RGAA_PATH_CATEGORIES;
+    let data = fs.readFileSync(path);
+    let json = JSON.parse(data);
+    let categories = [];
+
+    for (let key in json) {
+      categories.push(json[key]["title"]);
+    }
+
+    //console.log(json);
+    //console.log(categories);
+
+    this.categories = categories;
+  }
 
   load_rules() {
-    const rules_path = process.env.RULES_PATH + "**/*.md";
+    const rules_path = process.env.RGAA_PATH_RULES + "**/*.md";
     let files = glob.sync(rules_path);
     let rules = [];
 
@@ -29,10 +44,13 @@ class RGAA {
       if ("index" == filename) {
         let rule_id = directory;
         let content = this.load_markdown(file);
+        let category = this.get_category(rule_id.split(".")[0]);
+
         this.rules[rule_id] = {
           id: rule_id,
           path: file,
           tests: [],
+          category: category,
           ...content,
         };
       }
@@ -52,10 +70,10 @@ class RGAA {
   load_markdown(path) {
     let content = {};
     let data = fs.readFileSync(path, { encoding: "utf8", flag: "r" });
-    data = this.markdown.render(data);
+    let md = this.markdown.render(data);
     content = this.markdown.meta;
-    content.content = data;
-    content["title"] = this.toTxt(content["title"]);
+    content.body = data;
+    content["title"] = he.decode(this.toTxt(content["title"]));
 
     //console.log(this.markdown.meta);
     //console.log(content);
@@ -74,7 +92,7 @@ class RGAA {
   }
 
   get_category(id) {
-    return this.categories[id];
+    return this.categories[id - 1];
   }
 
   all_rules() {

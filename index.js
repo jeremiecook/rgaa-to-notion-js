@@ -3,18 +3,25 @@ require("dotenv").config();
 const { RGAA } = require("./src/rgaa.js");
 const { Notion } = require("./src/notion.js");
 
-rgaa = new RGAA();
-notion = new Notion();
+async function to_notion() {
+  rgaa = new RGAA();
+  notion = new Notion();
 
-rules = rgaa.all_rules();
-//console.log(rules);
+  rules = rgaa.all_rules();
 
-notion.create_rule(rules["9.1"]);
+  // id = await notion.create_rule(rules["9.1"]);
+  //   rules["9.1"].tests.forEach((test) => {
+  //     notion.create_test(id, test);
+  //   });
 
-// rules.forEach((rule) => {
-//   rule_id = notion.create_rule(rule);
+  for (let key in rules) {
+    let rule = rules[key];
+    rule_id = await notion.create_rule(rule);
 
-//   //   rule.tests.forEach((test) => {
-//   //     notion.create_test(rule_id, test);
-//   //   });
-// });
+    rule.tests.forEach((test) => {
+      notion.create_test(rule_id, test);
+    });
+  }
+}
+
+to_notion();
