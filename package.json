@@ -9,7 +9,9 @@
     "@instantish/martian": "^1.1.1",
     "@notionhq/client": "^1.0.4",
     "dotenv": "^16.0.1",
-    "globby": "^13.1.1"
+    "glob": "^8.0.3",
+    "remarkable": "^2.0.1",
+    "remarkable-meta": "^1.0.1"
   },
   "scripts": {
     "start": "node index"
