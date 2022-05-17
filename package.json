@@ -1,0 +1,17 @@
+{
+  "name": "rgaa-to-notion",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:jeremiecook/rgaa-to-notion-js.git",
+  "author": "Jérémie Cook <jeremie.cook@beta.gouv.fr>",
+  "license": "MIT",
+  "dependencies": {
+    "@instantish/martian": "^1.1.1",
+    "@notionhq/client": "^1.0.4",
+    "dotenv": "^16.0.1",
+    "globby": "^13.1.1"
+  },
+  "scripts": {
+    "start": "node index"
+  }
+}
